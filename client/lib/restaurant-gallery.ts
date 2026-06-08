@@ -8,13 +8,13 @@ export const restaurantPhotos: RestaurantPhoto[] = [
   {
     id: "interior",
     image:
-      "https://images.unsplash.com/photo-1517248135460-4c3ded0774f0?w=800&h=600&fit=crop",
+      "https://plus.unsplash.com/premium_photo-1661883237884-263e8de8869b?q=80&w=2089&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     wide: true,
   },
   {
     id: "dining",
     image:
-      "https://images.unsplash.com/photo-1555396273-367ea4336fda?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1592861956120-e524fc739696?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: "kitchen",
@@ -29,7 +29,7 @@ export const restaurantPhotos: RestaurantPhoto[] = [
   {
     id: "counter",
     image:
-      "https://images.unsplash.com/photo-1559339352-11d035aa6528?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     wide: true,
   },
   {
