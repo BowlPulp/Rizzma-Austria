@@ -180,6 +180,90 @@
       }
     }
   },
+  "AboutPage": {
+    "metaTitle": "Über uns — Rizzma",
+    "metaDescription": "Erfahre mehr über Rizzma — ein lokales Restaurant in Wien mit frischer Pizza, Burgern und Salaten sowie schneller Lieferung in ganz Österreich.",
+    "eyebrow": "Unsere Geschichte",
+    "title": "Gutes Essen, mit Herz in Wien gemacht",
+    "subtitle": "Rizzma begann als kleine Nachbarschaftsküche und wurde zu einem Ort, dem Einheimische für ehrliches Essen und zuverlässige Lieferung vertrauen.",
+    "storyTitle": "Von einem Ofen bis an deine Tür",
+    "storyParagraph1": "Rizzma eröffnete 2018 mit einem Ziel: Essen servieren, das wir selbst stolz auf den Tisch bringen würden. Was als kompaktes Restaurant in der Mariahilfer Straße begann, wurde schnell zum Favorit für Familien, Studierende und späte Hungerattacken in ganz Wien.",
+    "storyParagraph2": "Heute bereiten wir jede Pizza, jeden Burger und jeden Salat frisch zu — ob vor Ort, zum Mitnehmen oder per Lieferung. Wo möglich beziehen wir frische Zutaten regional, und unser Team behandelt jede Bestellung, als wäre sie die einzige.",
+    "valuesTitle": "Wofür wir stehen",
+    "values": {
+      "fresh": {
+        "title": "Frische Zutaten",
+        "description": "Qualitätsprodukte, hausgemachte Saucen und täglich frischer Teig — nie tiefgekühlt, nie hastig."
+      },
+      "delivery": {
+        "title": "Schnelle Lieferung",
+        "description": "Heißes Essen in 25–40 Minuten in Wien, mit Updates zu deiner Bestellung."
+      },
+      "passion": {
+        "title": "Mit Leidenschaft gemacht",
+        "description": "Unsere Köche sind stolz auf jeden Teller. Kein Fast Food — gutes Essen, schnell."
+      }
+    },
+    "stats": {
+      "founded": {
+        "value": "2018",
+        "label": "Gegründet",
+        "hint": "Seit Jahren in Wien"
+      },
+      "orders": {
+        "value": "50k+",
+        "label": "Bestellungen",
+        "hint": "Und jede Woche mehr"
+      },
+      "rating": {
+        "value": "4,8★",
+        "label": "Durchschnittsbewertung",
+        "hint": "Von zufriedenen Gästen"
+      }
+    },
+    "ctaTitle": "Hunger? Wir sind bereit.",
+    "ctaSubtitle": "Stöbere in unserer Speisekarte und bestelle deine Favoriten — Lieferung oder Abholung.",
+    "ctaButton": "Zur Speisekarte"
+  },
+  "ContactPage": {
+    "metaTitle": "Kontakt — Rizzma",
+    "metaDescription": "Kontaktiere Rizzma. Besuche uns in Wien, ruf uns an oder schreib uns — wir freuen uns auf deine Nachricht.",
+    "eyebrow": "Kontakt",
+    "title": "Kontakt zu Rizzma",
+    "subtitle": "Fragen zu einer Bestellung, Catering oder einfach Hallo sagen? Melde dich — wir antworten meist innerhalb weniger Stunden.",
+    "formTitle": "Schreib uns eine Nachricht",
+    "formSubtitle": "Fülle das Formular aus und unser Team meldet sich bei dir.",
+    "mapTitle": "Rizzma Standort auf der Karte",
+    "info": {
+      "address": {
+        "title": "Besuche uns",
+        "value": "Mariahilfer Straße 45\n1060 Wien, Österreich"
+      },
+      "phone": {
+        "title": "Telefon",
+        "value": "+43 1 234 5678\nMo – So während der Öffnungszeiten"
+      },
+      "email": {
+        "title": "E-Mail",
+        "value": "hello@rizzma.at\norders@rizzma.at"
+      },
+      "hours": {
+        "title": "Öffnungszeiten",
+        "value": "Mo – Do: 11:00 – 22:00\nFr – Sa: 11:00 – 23:00\nSo: 12:00 – 22:00"
+      }
+    },
+    "form": {
+      "name": "Dein Name",
+      "email": "E-Mail-Adresse",
+      "subject": "Betreff",
+      "message": "Nachricht",
+      "submit": "Nachricht senden",
+      "sending": "Wird gesendet…",
+      "successTitle": "Nachricht gesendet!",
+      "successMessage": "Danke für deine Nachricht. Unser Team antwortet so schnell wie möglich per E-Mail.",
+      "sendAnother": "Weitere Nachricht senden"
+    }
+  },
   "ReviewsPage": {
     "metaTitle": "Bewertungen — Rizzma",
     "metaDescription": "Lies, was Kunden über Rizzma sagen. Echte Bewertungen zu Pizza, Burgern und Lieferung.",

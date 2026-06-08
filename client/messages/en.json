@@ -180,6 +180,90 @@
       }
     }
   },
+  "AboutPage": {
+    "metaTitle": "About Us — Rizzma",
+    "metaDescription": "Learn about Rizzma — a local restaurant in Vienna serving fresh pizza, burgers, and salads with fast delivery across Austria.",
+    "eyebrow": "Our story",
+    "title": "Good food, made with heart in Vienna",
+    "subtitle": "Rizzma started as a small neighbourhood kitchen and grew into a place locals trust for honest food and reliable delivery.",
+    "storyTitle": "From a single oven to your doorstep",
+    "storyParagraph1": "Rizzma opened in 2018 with one goal: serve food we'd proudly bring to our own table. What began as a compact restaurant on Mariahilfer Straße quickly became a favourite for families, students, and late-night cravings across Vienna.",
+    "storyParagraph2": "Today we prepare every pizza, burger, and salad to order — whether you dine in, pick up, or get it delivered. We source fresh ingredients locally where we can, and our team treats every order like it's the only one that matters.",
+    "valuesTitle": "What we stand for",
+    "values": {
+      "fresh": {
+        "title": "Fresh ingredients",
+        "description": "Quality produce, house-made sauces, and dough prepared daily — never frozen, never rushed."
+      },
+      "delivery": {
+        "title": "Fast & reliable delivery",
+        "description": "Hot food at your door in 25–40 minutes across Vienna, with real-time updates on your order."
+      },
+      "passion": {
+        "title": "Made with passion",
+        "description": "Our chefs take pride in every plate. It's not fast food — it's good food, fast."
+      }
+    },
+    "stats": {
+      "founded": {
+        "value": "2018",
+        "label": "Founded",
+        "hint": "Serving Vienna for years"
+      },
+      "orders": {
+        "value": "50k+",
+        "label": "Orders delivered",
+        "hint": "And counting every week"
+      },
+      "rating": {
+        "value": "4.8★",
+        "label": "Average rating",
+        "hint": "From happy customers"
+      }
+    },
+    "ctaTitle": "Hungry? We're ready.",
+    "ctaSubtitle": "Browse our menu and order your favourites — delivery or pickup, your choice.",
+    "ctaButton": "Order from the menu"
+  },
+  "ContactPage": {
+    "metaTitle": "Contact — Rizzma",
+    "metaDescription": "Get in touch with Rizzma. Visit us in Vienna, call us, or send a message — we'd love to hear from you.",
+    "eyebrow": "Get in touch",
+    "title": "Contact Rizzma",
+    "subtitle": "Questions about an order, catering, or just want to say hello? Reach out — we typically reply within a few hours.",
+    "formTitle": "Send us a message",
+    "formSubtitle": "Fill in the form and our team will get back to you shortly.",
+    "mapTitle": "Rizzma location on map",
+    "info": {
+      "address": {
+        "title": "Visit us",
+        "value": "Mariahilfer Straße 45\n1060 Vienna, Austria"
+      },
+      "phone": {
+        "title": "Phone",
+        "value": "+43 1 234 5678\nMon – Sun during opening hours"
+      },
+      "email": {
+        "title": "Email",
+        "value": "hello@rizzma.at\norders@rizzma.at"
+      },
+      "hours": {
+        "title": "Opening hours",
+        "value": "Mon – Thu: 11:00 – 22:00\nFri – Sat: 11:00 – 23:00\nSun: 12:00 – 22:00"
+      }
+    },
+    "form": {
+      "name": "Your name",
+      "email": "Email address",
+      "subject": "Subject",
+      "message": "Message",
+      "submit": "Send message",
+      "sending": "Sending…",
+      "successTitle": "Message sent!",
+      "successMessage": "Thanks for reaching out. Our team will reply to your email as soon as possible.",
+      "sendAnother": "Send another message"
+    }
+  },
   "ReviewsPage": {
     "metaTitle": "Reviews — Rizzma",
     "metaDescription": "See what customers say about Rizzma. Real reviews from pizza, burger, and delivery orders.",
