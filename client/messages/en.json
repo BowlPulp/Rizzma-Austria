@@ -1,0 +1,269 @@
+{
+  "Metadata": {
+    "title": "Rizzma — Fresh Food Delivered Fast",
+    "description": "Order your favorite dishes from Rizzma and enjoy restaurant-quality meals at home."
+  },
+  "Navbar": {
+    "home": "Home",
+    "menu": "Menu",
+    "reviews": "Reviews",
+    "about": "About",
+    "contact": "Contact",
+    "login": "Login"
+  },
+  "Hero": {
+    "deliveryBadge": "🚚 Delivery in 25–40 min",
+    "titleLine1": "Fresh Food",
+    "titleLine2": "Delivered Fast.",
+    "subtitle": "Order your favorite dishes directly from Rizzma and enjoy restaurant-quality meals at home.",
+    "searchPlaceholder": "Search burgers, pizza, kebabs...",
+    "orderNow": "Order Now",
+    "reviews": "Reviews",
+    "averageDelivery": "Average Delivery",
+    "deliveryFee": "Delivery Fee*"
+  },
+  "Categories": {
+    "pizza": "🍕 Pizza",
+    "burgers": "🍔 Burgers",
+    "kebabs": "🥙 Kebabs",
+    "sides": "🍟 Sides",
+    "salads": "🥗 Salads",
+    "drinks": "🥤 Drinks",
+    "desserts": "🍰 Desserts"
+  },
+  "RestaurantGallery": {
+    "eyebrow": "Visit Rizzma",
+    "title": "Inside our restaurant",
+    "subtitle": "A warm space where every dish is prepared fresh — from our kitchen to your table.",
+    "cta": "View full menu",
+    "photos": {
+      "interior": {
+        "alt": "Rizzma restaurant dining room",
+        "title": "Main dining room",
+        "caption": "Cozy seating for families and friends"
+      },
+      "dining": {
+        "alt": "Guests dining at Rizzma",
+        "title": "Dining experience",
+        "caption": "Relaxed atmosphere, great food"
+      },
+      "kitchen": {
+        "alt": "Rizzma kitchen",
+        "title": "Open kitchen",
+        "caption": "Watch our chefs at work"
+      },
+      "pizza-oven": {
+        "alt": "Fresh pizza from the oven",
+        "title": "Wood-fired pizzas",
+        "caption": "Baked to perfection daily"
+      },
+      "counter": {
+        "alt": "Rizzma service counter",
+        "title": "Pickup counter",
+        "caption": "Quick pickup for orders on the go"
+      },
+      "team": {
+        "alt": "Plated dishes at Rizzma",
+        "title": "Freshly plated",
+        "caption": "Every order made with care"
+      }
+    }
+  },
+  "Footer": {
+    "tagline": "Authentic food delivered fresh to your door.",
+    "menu": "Menu",
+    "pizza": "Pizza",
+    "burgers": "Burgers",
+    "kebabs": "Kebabs",
+    "desserts": "Desserts",
+    "company": "Company",
+    "aboutUs": "About Us",
+    "contact": "Contact",
+    "openingHours": "Opening Hours",
+    "monThu": "Mon - Thu: 11:00 - 22:00",
+    "friSat": "Fri - Sat: 11:00 - 23:00",
+    "sun": "Sun: 12:00 - 22:00",
+    "copyright": "© 2026 Rizzma. All rights reserved."
+  },
+  "LocaleSwitcher": {
+    "en": "English",
+    "de": "Deutsch"
+  },
+  "ThemeSwitcher": {
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode"
+  },
+  "MenuPage": {
+    "metaTitle": "Menu — Rizzma",
+    "metaDescription": "Browse pizzas, burgers, and salads from Rizzma. Order fresh food for delivery or pickup.",
+    "eyebrow": "Rizzma Kitchen",
+    "title": "Our Menu",
+    "subtitle": "Handcrafted pizzas, juicy burgers, and fresh salads — made fresh to order at Rizzma.",
+    "searchPlaceholder": "Search pizza, burgers, salads…",
+    "searchLabel": "Search menu",
+    "clearSearch": "Clear search",
+    "searchResults": "{count, plural, one {# result} other {# results}} for \"{query}\"",
+    "searchNoResultsTitle": "No dishes match your search",
+    "searchNoResultsDescription": "Try a different keyword or browse by category.",
+    "filters": {
+      "all": "All",
+      "pizza": "🍕 Pizza",
+      "burgers": "🍔 Burgers",
+      "salads": "🥗 Salads"
+    },
+    "addToCart": "Add to cart",
+    "addedToCart": "Added!",
+    "itemCount": "{count, plural, one {# item} other {# items}}",
+    "emptyTitle": "No items found",
+    "emptyDescription": "Try selecting a different category.",
+    "badges": {
+      "popular": "Popular",
+      "spicy": "Spicy",
+      "vegetarian": "Veggie"
+    },
+    "items": {
+      "margherita": {
+        "name": "Margherita Pizza",
+        "description": "San Marzano tomato sauce, fresh mozzarella, basil, and extra virgin olive oil on a thin crust."
+      },
+      "pepperoni": {
+        "name": "Pepperoni Pizza",
+        "description": "Classic tomato base topped with mozzarella and crispy pepperoni slices."
+      },
+      "quattro-formaggi": {
+        "name": "Quattro Formaggi",
+        "description": "Four-cheese blend of mozzarella, gorgonzola, parmesan, and fontina on a golden crust."
+      },
+      "diavola": {
+        "name": "Diavola Pizza",
+        "description": "Spicy salami, chili flakes, tomato sauce, and melted mozzarella for heat lovers."
+      },
+      "bbq-chicken": {
+        "name": "BBQ Chicken Pizza",
+        "description": "Smoky BBQ sauce, grilled chicken, red onion, mozzarella, and fresh cilantro."
+      },
+      "classic-burger": {
+        "name": "Classic Rizzma Burger",
+        "description": "Angus beef patty, cheddar, lettuce, tomato, pickles, and our signature Rizzma sauce."
+      },
+      "double-cheese": {
+        "name": "Double Cheese Burger",
+        "description": "Two beef patties stacked with double cheddar, caramelized onions, and house mayo."
+      },
+      "bacon-bbq": {
+        "name": "Bacon BBQ Burger",
+        "description": "Crispy bacon, cheddar, onion rings, and smoky BBQ sauce on a brioche bun."
+      },
+      "spicy-chicken": {
+        "name": "Spicy Chicken Burger",
+        "description": "Crispy chicken fillet, pepper jack, jalapeños, and chipotle mayo with a kick."
+      },
+      "veggie-burger": {
+        "name": "Veggie Burger",
+        "description": "Grilled plant-based patty, avocado, arugula, tomato, and herb aioli."
+      },
+      "caesar": {
+        "name": "Caesar Salad",
+        "description": "Crisp romaine, parmesan shavings, garlic croutons, and creamy Caesar dressing."
+      },
+      "greek": {
+        "name": "Greek Salad",
+        "description": "Cucumber, tomato, red onion, olives, feta, and oregano vinaigrette."
+      },
+      "grilled-chicken": {
+        "name": "Grilled Chicken Salad",
+        "description": "Mixed greens, grilled chicken breast, cherry tomatoes, and honey mustard dressing."
+      },
+      "caprese": {
+        "name": "Caprese Salad",
+        "description": "Fresh mozzarella, ripe tomatoes, basil, balsamic glaze, and extra virgin olive oil."
+      }
+    }
+  },
+  "ReviewsPage": {
+    "metaTitle": "Reviews — Rizzma",
+    "metaDescription": "See what customers say about Rizzma. Real reviews from pizza, burger, and delivery orders.",
+    "eyebrow": "Customer love",
+    "title": "What our guests say",
+    "subtitle": "Thousands of orders delivered — here's what people think about Rizzma.",
+    "totalReviews": "Based on {count} reviews",
+    "ordered": "Ordered",
+    "items": {
+      "sarah": {
+        "initials": "SM",
+        "name": "Sarah M.",
+        "date": "2 weeks ago",
+        "text": "Best pizza in town! The Margherita arrived hot and the crust was perfectly crispy. Delivery was faster than expected too.",
+        "ordered": "Margherita Pizza"
+      },
+      "marco": {
+        "initials": "MR",
+        "name": "Marco R.",
+        "date": "1 month ago",
+        "text": "The Classic Rizzma Burger is incredible — juicy patty, fresh toppings, and the sauce is addictive. Will definitely order again.",
+        "ordered": "Classic Rizzma Burger"
+      },
+      "elena": {
+        "initials": "EK",
+        "name": "Elena K.",
+        "date": "3 weeks ago",
+        "text": "Great salads and quick delivery. The Greek salad was fresh and generous. Only wish the dressing came on the side, but still 4 stars!",
+        "ordered": "Greek Salad"
+      },
+      "thomas": {
+        "initials": "TW",
+        "name": "Thomas W.",
+        "date": "5 days ago",
+        "text": "Ordered for a family dinner — pepperoni pizza, two burgers, and sides. Everything was spot on. Rizzma is our new go-to.",
+        "ordered": "Pepperoni Pizza & Bacon BBQ Burger"
+      },
+      "julia": {
+        "initials": "JH",
+        "name": "Julia H.",
+        "date": "1 week ago",
+        "text": "Love that I can order in English and German. Food quality is restaurant-level and the packaging keeps everything warm. Highly recommend!",
+        "ordered": "Diavola Pizza"
+      }
+    }
+  },
+  "Cart": {
+    "open": "Open cart",
+    "close": "Close cart",
+    "title": "Your Order",
+    "itemCount": "{count, plural, =0 {No items} one {# item} other {# items}}",
+    "emptyTitle": "Your cart is empty",
+    "emptyDescription": "Add something delicious from our menu to get started.",
+    "browseMenu": "Browse menu",
+    "subtotal": "Subtotal",
+    "deliveryNote": "Delivery fee calculated at checkout.",
+    "checkout": "Proceed to checkout",
+    "clearCart": "Clear cart",
+    "remove": "Remove item",
+    "increase": "Increase quantity",
+    "decrease": "Decrease quantity",
+    "deliverTo": "Deliver to",
+    "addLocation": "Add delivery address",
+    "addLocationHint": "Use GPS or enter your address manually",
+    "changeLocation": "Change",
+    "checkoutNeedsLocation": "Add address to checkout"
+  },
+  "Location": {
+    "title": "Delivery address",
+    "subtitle": "Tell us where to deliver your order from Rizzma.",
+    "subtitleWithItem": "Add your address to complete adding this item to your cart.",
+    "useMyLocation": "Use my current location",
+    "locating": "Finding your location…",
+    "or": "or",
+    "addressLabel": "Delivery address",
+    "addressPlaceholder": "Street, building, floor, city…",
+    "confirmAddress": "Confirm address",
+    "close": "Close",
+    "errors": {
+      "addressTooShort": "Please enter a complete delivery address.",
+      "permissionDenied": "Location access was denied. You can type your address instead.",
+      "unavailable": "Could not detect your location. Please enter your address manually.",
+      "timeout": "Location request timed out. Please try again or enter your address.",
+      "generic": "Something went wrong. Please enter your address manually."
+    }
+  }
+}

@@ -1,0 +1,269 @@
+{
+  "Metadata": {
+    "title": "Rizzma — Frisches Essen, schnell geliefert",
+    "description": "Bestelle deine Lieblingsgerichte bei Rizzma und genieße Restaurantqualität zu Hause."
+  },
+  "Navbar": {
+    "home": "Startseite",
+    "menu": "Speisekarte",
+    "reviews": "Bewertungen",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "login": "Anmelden"
+  },
+  "Hero": {
+    "deliveryBadge": "🚚 Lieferung in 25–40 Min.",
+    "titleLine1": "Frisches Essen",
+    "titleLine2": "Schnell geliefert.",
+    "subtitle": "Bestelle deine Lieblingsgerichte direkt bei Rizzma und genieße Restaurantqualität zu Hause.",
+    "searchPlaceholder": "Burger, Pizza, Kebabs suchen...",
+    "orderNow": "Jetzt bestellen",
+    "reviews": "Bewertungen",
+    "averageDelivery": "Durchschnittliche Lieferzeit",
+    "deliveryFee": "Liefergebühr*"
+  },
+  "Categories": {
+    "pizza": "🍕 Pizza",
+    "burgers": "🍔 Burger",
+    "kebabs": "🥙 Kebabs",
+    "sides": "🍟 Beilagen",
+    "salads": "🥗 Salate",
+    "drinks": "🥤 Getränke",
+    "desserts": "🍰 Desserts"
+  },
+  "RestaurantGallery": {
+    "eyebrow": "Besuche Rizzma",
+    "title": "Ein Blick ins Restaurant",
+    "subtitle": "Ein gemütlicher Ort, an dem jedes Gericht frisch zubereitet wird — von unserer Küche auf deinen Tisch.",
+    "cta": "Zur Speisekarte",
+    "photos": {
+      "interior": {
+        "alt": "Gastraum im Restaurant Rizzma",
+        "title": "Hauptgastraum",
+        "caption": "Gemütliche Plätze für Familie und Freunde"
+      },
+      "dining": {
+        "alt": "Gäste essen bei Rizzma",
+        "title": "Esserlebnis",
+        "caption": "Entspannte Atmosphäre, gutes Essen"
+      },
+      "kitchen": {
+        "alt": "Küche bei Rizzma",
+        "title": "Offene Küche",
+        "caption": "Sieh unseren Köchen bei der Arbeit zu"
+      },
+      "pizza-oven": {
+        "alt": "Frische Pizza aus dem Ofen",
+        "title": "Pizzen aus dem Ofen",
+        "caption": "Täglich frisch gebacken"
+      },
+      "counter": {
+        "alt": "Theke bei Rizzma",
+        "title": "Abholtheke",
+        "caption": "Schnelle Abholung für unterwegs"
+      },
+      "team": {
+        "alt": "Angerichtete Gerichte bei Rizzma",
+        "title": "Frisch angerichtet",
+        "caption": "Jede Bestellung mit Sorgfalt zubereitet"
+      }
+    }
+  },
+  "Footer": {
+    "tagline": "Authentisches Essen, frisch an deine Tür geliefert.",
+    "menu": "Speisekarte",
+    "pizza": "Pizza",
+    "burgers": "Burger",
+    "kebabs": "Kebabs",
+    "desserts": "Desserts",
+    "company": "Unternehmen",
+    "aboutUs": "Über uns",
+    "contact": "Kontakt",
+    "openingHours": "Öffnungszeiten",
+    "monThu": "Mo - Do: 11:00 - 22:00",
+    "friSat": "Fr - Sa: 11:00 - 23:00",
+    "sun": "So: 12:00 - 22:00",
+    "copyright": "© 2026 Rizzma. Alle Rechte vorbehalten."
+  },
+  "LocaleSwitcher": {
+    "en": "English",
+    "de": "Deutsch"
+  },
+  "ThemeSwitcher": {
+    "switchToLight": "Zum hellen Modus wechseln",
+    "switchToDark": "Zum dunklen Modus wechseln"
+  },
+  "MenuPage": {
+    "metaTitle": "Speisekarte — Rizzma",
+    "metaDescription": "Entdecke Pizzen, Burger und Salate von Rizzma. Frisches Essen zum Liefern oder Abholen.",
+    "eyebrow": "Rizzma Küche",
+    "title": "Unsere Speisekarte",
+    "subtitle": "Handgemachte Pizzen, saftige Burger und frische Salate — frisch zubereitet bei Rizzma.",
+    "searchPlaceholder": "Pizza, Burger, Salate suchen…",
+    "searchLabel": "Speisekarte durchsuchen",
+    "clearSearch": "Suche löschen",
+    "searchResults": "{count, plural, one {# Ergebnis} other {# Ergebnisse}} für \"{query}\"",
+    "searchNoResultsTitle": "Keine Gerichte gefunden",
+    "searchNoResultsDescription": "Probiere ein anderes Stichwort oder wähle eine Kategorie.",
+    "filters": {
+      "all": "Alle",
+      "pizza": "🍕 Pizza",
+      "burgers": "🍔 Burger",
+      "salads": "🥗 Salate"
+    },
+    "addToCart": "In den Warenkorb",
+    "addedToCart": "Hinzugefügt!",
+    "itemCount": "{count, plural, one {# Artikel} other {# Artikel}}",
+    "emptyTitle": "Keine Artikel gefunden",
+    "emptyDescription": "Wähle eine andere Kategorie.",
+    "badges": {
+      "popular": "Beliebt",
+      "spicy": "Scharf",
+      "vegetarian": "Vegetarisch"
+    },
+    "items": {
+      "margherita": {
+        "name": "Pizza Margherita",
+        "description": "San-Marzano-Tomatensauce, frischer Mozzarella, Basilikum und Olivenöl auf dünnem Teig."
+      },
+      "pepperoni": {
+        "name": "Pizza Pepperoni",
+        "description": "Klassische Tomatenbasis mit Mozzarella und knusprigen Pepperoni-Scheiben."
+      },
+      "quattro-formaggi": {
+        "name": "Quattro Formaggi",
+        "description": "Vier-Käse-Mischung aus Mozzarella, Gorgonzola, Parmesan und Fontina."
+      },
+      "diavola": {
+        "name": "Pizza Diavola",
+        "description": "Scharfe Salami, Chiliflocken, Tomatensauce und geschmolzener Mozzarella."
+      },
+      "bbq-chicken": {
+        "name": "BBQ Chicken Pizza",
+        "description": "Rauchige BBQ-Sauce, gegrilltes Hähnchen, rote Zwiebeln, Mozzarella und Koriander."
+      },
+      "classic-burger": {
+        "name": "Classic Rizzma Burger",
+        "description": "Angus-Beef-Patty, Cheddar, Salat, Tomate, Gurken und unsere Rizzma-Sauce."
+      },
+      "double-cheese": {
+        "name": "Double Cheese Burger",
+        "description": "Zwei Beef-Patties mit doppelt Cheddar, karamellisierten Zwiebeln und Haus-Mayo."
+      },
+      "bacon-bbq": {
+        "name": "Bacon BBQ Burger",
+        "description": "Knuspriger Bacon, Cheddar, Zwiebelringe und rauchige BBQ-Sauce im Brioche-Bun."
+      },
+      "spicy-chicken": {
+        "name": "Spicy Chicken Burger",
+        "description": "Knuspriges Hähnchenfilet, Pepper Jack, Jalapeños und Chipotle-Mayo."
+      },
+      "veggie-burger": {
+        "name": "Veggie Burger",
+        "description": "Gegrilltes Plant-Based-Patty, Avocado, Rucola, Tomate und Kräuter-Aioli."
+      },
+      "caesar": {
+        "name": "Caesar Salat",
+        "description": "Knackiger Romana-Salat, Parmesan, Knoblauch-Croutons und cremiges Caesar-Dressing."
+      },
+      "greek": {
+        "name": "Griechischer Salat",
+        "description": "Gurke, Tomate, rote Zwiebel, Oliven, Feta und Oregano-Vinaigrette."
+      },
+      "grilled-chicken": {
+        "name": "Salat mit gegrilltem Hähnchen",
+        "description": "Blattsalat-Mix, gegrillte Hähnchenbrust, Cherrytomaten und Honig-Senf-Dressing."
+      },
+      "caprese": {
+        "name": "Caprese Salat",
+        "description": "Frischer Mozzarella, reife Tomaten, Basilikum, Balsamico-Glasur und Olivenöl."
+      }
+    }
+  },
+  "ReviewsPage": {
+    "metaTitle": "Bewertungen — Rizzma",
+    "metaDescription": "Lies, was Kunden über Rizzma sagen. Echte Bewertungen zu Pizza, Burgern und Lieferung.",
+    "eyebrow": "Kundenstimmen",
+    "title": "Was unsere Gäste sagen",
+    "subtitle": "Tausende Bestellungen geliefert — so finden unsere Gäste Rizzma.",
+    "totalReviews": "Basierend auf {count} Bewertungen",
+    "ordered": "Bestellt",
+    "items": {
+      "sarah": {
+        "initials": "SM",
+        "name": "Sarah M.",
+        "date": "vor 2 Wochen",
+        "text": "Beste Pizza in der Stadt! Die Margherita kam heiß an und der Teig war perfekt knusprig. Lieferung war sogar schneller als erwartet.",
+        "ordered": "Pizza Margherita"
+      },
+      "marco": {
+        "initials": "MR",
+        "name": "Marco R.",
+        "date": "vor 1 Monat",
+        "text": "Der Classic Rizzma Burger ist unglaublich — saftiges Patty, frische Toppings und die Sauce macht süchtig. Bestelle definitiv wieder.",
+        "ordered": "Classic Rizzma Burger"
+      },
+      "elena": {
+        "initials": "EK",
+        "name": "Elena K.",
+        "date": "vor 3 Wochen",
+        "text": "Tolle Salate und schnelle Lieferung. Der griechische Salat war frisch und großzügig. Dressing separat wäre schön, trotzdem 4 Sterne!",
+        "ordered": "Griechischer Salat"
+      },
+      "thomas": {
+        "initials": "TW",
+        "name": "Thomas W.",
+        "date": "vor 5 Tagen",
+        "text": "Für das Familienessen bestellt — Pepperoni-Pizza, zwei Burger und Beilagen. Alles top. Rizzma ist unser neuer Favorit.",
+        "ordered": "Pizza Pepperoni & Bacon BBQ Burger"
+      },
+      "julia": {
+        "initials": "JH",
+        "name": "Julia H.",
+        "date": "vor 1 Woche",
+        "text": "Super, dass ich auf Deutsch und Englisch bestellen kann. Qualität wie im Restaurant und die Verpackung hält alles warm. Sehr empfehlenswert!",
+        "ordered": "Pizza Diavola"
+      }
+    }
+  },
+  "Cart": {
+    "open": "Warenkorb öffnen",
+    "close": "Warenkorb schließen",
+    "title": "Deine Bestellung",
+    "itemCount": "{count, plural, =0 {Keine Artikel} one {# Artikel} other {# Artikel}}",
+    "emptyTitle": "Dein Warenkorb ist leer",
+    "emptyDescription": "Füge etwas Leckeres aus unserer Speisekarte hinzu.",
+    "browseMenu": "Speisekarte ansehen",
+    "subtotal": "Zwischensumme",
+    "deliveryNote": "Liefergebühr wird an der Kasse berechnet.",
+    "checkout": "Zur Kasse",
+    "clearCart": "Warenkorb leeren",
+    "remove": "Artikel entfernen",
+    "increase": "Menge erhöhen",
+    "decrease": "Menge verringern",
+    "deliverTo": "Lieferung an",
+    "addLocation": "Lieferadresse hinzufügen",
+    "addLocationHint": "GPS nutzen oder Adresse manuell eingeben",
+    "changeLocation": "Ändern",
+    "checkoutNeedsLocation": "Adresse für Kasse hinzufügen"
+  },
+  "Location": {
+    "title": "Lieferadresse",
+    "subtitle": "Sag uns, wohin wir deine Bestellung von Rizzma liefern sollen.",
+    "subtitleWithItem": "Gib deine Adresse ein, um diesen Artikel in den Warenkorb zu legen.",
+    "useMyLocation": "Meinen Standort verwenden",
+    "locating": "Standort wird ermittelt…",
+    "or": "oder",
+    "addressLabel": "Lieferadresse",
+    "addressPlaceholder": "Straße, Hausnummer, Stock, Stadt…",
+    "confirmAddress": "Adresse bestätigen",
+    "close": "Schließen",
+    "errors": {
+      "addressTooShort": "Bitte gib eine vollständige Lieferadresse ein.",
+      "permissionDenied": "Standortzugriff wurde verweigert. Du kannst deine Adresse manuell eingeben.",
+      "unavailable": "Standort konnte nicht ermittelt werden. Bitte Adresse manuell eingeben.",
+      "timeout": "Standortanfrage hat zu lange gedauert. Bitte erneut versuchen oder Adresse eingeben.",
+      "generic": "Etwas ist schiefgelaufen. Bitte gib deine Adresse manuell ein."
+    }
+  }
+}
