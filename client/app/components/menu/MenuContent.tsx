@@ -164,7 +164,7 @@ export default function MenuContent({ initialSearch = "" }: MenuContentProps) {
         </div>
       </section>
 
-      <section className="sticky top-20 z-40 border-b border-neutral-200 bg-white/95 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/95">
+      <section className="sticky top-16 z-40 border-b border-neutral-200 bg-white/95 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/95 sm:top-20">
         <div className="mx-auto max-w-7xl px-6 py-4">
           <div className="flex gap-2 overflow-x-auto scrollbar-hide">
             {menuCategories.map((category) => (

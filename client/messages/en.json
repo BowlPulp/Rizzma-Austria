@@ -9,7 +9,11 @@
     "reviews": "Reviews",
     "about": "About",
     "contact": "Contact",
-    "login": "Login"
+    "login": "Login",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Language",
+    "appearance": "Appearance"
   },
   "Hero": {
     "deliveryBadge": "🚚 Delivery in 25–40 min",
