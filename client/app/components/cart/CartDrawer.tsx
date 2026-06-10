@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import { Minus, MapPin, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { useCart } from "@/app/providers/CartProvider";
 import { getMenuItemById } from "@/lib/menu-data";
@@ -10,6 +10,7 @@ import { formatPrice } from "@/lib/format-price";
 
 export default function CartDrawer() {
   const t = useTranslations("Cart");
+  const router = useRouter();
   const menuT = useTranslations("MenuPage");
   const {
     items,
@@ -214,7 +215,12 @@ export default function CartDrawer() {
                 type="button"
                 disabled={!deliveryLocation}
                 onClick={() => {
-                  if (!deliveryLocation) openLocationPrompt();
+                  if (!deliveryLocation) {
+                    openLocationPrompt();
+                  } else {
+                    closeCart();
+                    router.push("/checkout");
+                  }
                 }}
                 className="w-full rounded-xl bg-red-600 py-4 text-sm font-semibold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50"
               >

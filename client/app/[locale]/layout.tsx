@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Geist, Geist_Mono } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import ThemeProvider from "../providers/ThemeProvider";
+import AuthProvider from "../providers/AuthProvider";
 import CartProvider from "../providers/CartProvider";
 
 const geistSans = Geist({
@@ -58,7 +59,9 @@ export default async function LocaleLayout({
       <body className="min-h-full flex flex-col">
         <ThemeProvider>
           <NextIntlClientProvider>
-            <CartProvider>{children}</CartProvider>
+            <CartProvider>
+                <AuthProvider>{children}</AuthProvider>
+              </CartProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
