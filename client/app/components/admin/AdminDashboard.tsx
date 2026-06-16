@@ -74,6 +74,13 @@ type AdminMenuItem = {
   available: boolean;
 };
 
+type Category = {
+  _id: string;
+  slug: string;
+  name: string;
+  order: number;
+};
+
 type Tab = "all" | "pending" | "preparing" | "ready" | "delivered";
 type Section = "orders" | "menu";
 
@@ -97,6 +104,9 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [orders, setOrders] = useState<Order[]>([]);
   const [menuItems, setMenuItems] = useState<AdminMenuItem[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const [categoryError, setCategoryError] = useState("");
   const [activeTab, setActiveTab] = useState<Tab>("all");
   const [expandedOrderId, setExpandedOrderId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -110,7 +120,7 @@ export default function AdminDashboard() {
     name: "",
     description: "",
     price: "",
-    category: "pizza",
+    category: "",
     image: "",
     available: true,
   });
@@ -142,11 +152,25 @@ export default function AdminDashboard() {
     }
   }, []);
 
+  const fetchCategories = useCallback(async () => {
+    try {
+      const data = await apiFetch<{ categories: Category[] }>("/admin/categories");
+      setCategories(data.categories);
+    } catch {
+      setCategories([]);
+    }
+  }, []);
+
   const loadData = useCallback(async () => {
     setIsLoading(true);
-    await Promise.all([fetchStats(), fetchOrders(), fetchMenuItems()]);
+    await Promise.all([
+      fetchStats(),
+      fetchOrders(),
+      fetchMenuItems(),
+      fetchCategories(),
+    ]);
     setIsLoading(false);
-  }, [fetchStats, fetchOrders, fetchMenuItems]);
+  }, [fetchStats, fetchOrders, fetchMenuItems, fetchCategories]);
 
   useEffect(() => {
     if (!authLoading && (!user || !isAdmin)) {
@@ -161,7 +185,12 @@ export default function AdminDashboard() {
 
   async function handleRefresh() {
     setIsRefreshing(true);
-    await Promise.all([fetchStats(), fetchOrders(), fetchMenuItems()]);
+    await Promise.all([
+      fetchStats(),
+      fetchOrders(),
+      fetchMenuItems(),
+      fetchCategories(),
+    ]);
     setIsRefreshing(false);
   }
 
@@ -202,7 +231,18 @@ export default function AdminDashboard() {
     }
   }
 
+  const [addError, setAddError] = useState("");
+
   async function handleAddMenuItem() {
+    setAddError("");
+    if (!newItem.name.trim()) {
+      setAddError(t("itemName"));
+      return;
+    }
+    if (!newItem.category) {
+      setAddError(t("itemCategory"));
+      return;
+    }
     try {
       await apiFetch("/admin/menu", {
         method: "POST",
@@ -216,13 +256,44 @@ export default function AdminDashboard() {
         name: "",
         description: "",
         price: "",
-        category: "pizza",
+        category: "",
         image: "",
         available: true,
       });
       await fetchMenuItems();
-    } catch {
-      /* silently fail */
+    } catch (err) {
+      setAddError(
+        err instanceof Error ? err.message : t("saveItem"),
+      );
+    }
+  }
+
+  async function handleAddCategory() {
+    setCategoryError("");
+    if (!newCategoryName.trim()) return;
+    try {
+      await apiFetch("/admin/categories", {
+        method: "POST",
+        body: JSON.stringify({ name: newCategoryName.trim() }),
+      });
+      setNewCategoryName("");
+      await fetchCategories();
+    } catch (err) {
+      setCategoryError(
+        err instanceof Error ? err.message : t("addCategory"),
+      );
+    }
+  }
+
+  async function handleDeleteCategory(categoryId: string) {
+    setCategoryError("");
+    try {
+      await apiFetch(`/admin/categories/${categoryId}`, { method: "DELETE" });
+      await fetchCategories();
+    } catch (err) {
+      setCategoryError(
+        err instanceof Error ? err.message : t("deleteCategory"),
+      );
     }
   }
 
@@ -559,6 +630,58 @@ export default function AdminDashboard() {
             </button>
           </div>
 
+          {/* Category Management */}
+          <div className="mb-4 rounded-2xl border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900">
+            <h3 className="mb-3 font-semibold">{t("categories")}</h3>
+            <div className="mb-3 flex flex-wrap gap-2">
+              {categories.length === 0 ? (
+                <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                  {t("noCategories")}
+                </p>
+              ) : (
+                categories.map((cat) => (
+                  <span
+                    key={cat.slug}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-neutral-100 py-1 pl-3 pr-1.5 text-sm dark:bg-neutral-800"
+                  >
+                    {cat.name}
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteCategory(cat._id)}
+                      className="flex size-5 items-center justify-center rounded-full text-neutral-400 transition hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-950"
+                      title={t("deleteCategory")}
+                    >
+                      <X size={13} />
+                    </button>
+                  </span>
+                ))
+              )}
+            </div>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                placeholder={t("categoryName")}
+                value={newCategoryName}
+                onChange={(e) => setNewCategoryName(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleAddCategory();
+                }}
+                className="flex-1 rounded-xl border border-neutral-300 bg-transparent px-3 py-2.5 text-sm dark:border-neutral-700"
+              />
+              <button
+                type="button"
+                onClick={handleAddCategory}
+                className="inline-flex items-center gap-1.5 rounded-xl bg-neutral-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-neutral-700 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-300"
+              >
+                <Plus size={16} />
+                {t("addCategory")}
+              </button>
+            </div>
+            {categoryError && (
+              <p className="mt-3 text-sm text-red-600">{categoryError}</p>
+            )}
+          </div>
+
           {/* Add New Item Form */}
           {showAddForm && (
             <div className="mb-4 rounded-2xl border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900">
@@ -608,12 +731,14 @@ export default function AdminDashboard() {
                   }
                   className="rounded-xl border border-neutral-300 bg-transparent px-3 py-2.5 text-sm dark:border-neutral-700"
                 >
-                  <option value="pizza">Pizza</option>
-                  <option value="burgers">Burgers</option>
-                  <option value="salads">Salads</option>
-                  <option value="sides">Sides</option>
-                  <option value="drinks">Drinks</option>
-                  <option value="desserts">Desserts</option>
+                  <option value="" disabled>
+                    {t("itemCategory")}
+                  </option>
+                  {categories.map((cat) => (
+                    <option key={cat.slug} value={cat.slug}>
+                      {cat.name}
+                    </option>
+                  ))}
                 </select>
                 <textarea
                   placeholder={t("itemDescription")}
@@ -628,6 +753,9 @@ export default function AdminDashboard() {
                   className="rounded-xl border border-neutral-300 bg-transparent px-3 py-2.5 text-sm sm:col-span-2 dark:border-neutral-700"
                 />
               </div>
+              {addError && (
+                <p className="mt-3 text-sm text-red-600">{addError}</p>
+              )}
               <button
                 type="button"
                 onClick={handleAddMenuItem}
@@ -700,12 +828,18 @@ export default function AdminDashboard() {
                   }
                   className="rounded-xl border border-neutral-300 bg-transparent px-3 py-2.5 text-sm dark:border-neutral-700"
                 >
-                  <option value="pizza">Pizza</option>
-                  <option value="burgers">Burgers</option>
-                  <option value="salads">Salads</option>
-                  <option value="sides">Sides</option>
-                  <option value="drinks">Drinks</option>
-                  <option value="desserts">Desserts</option>
+                  {!categories.some(
+                    (cat) => cat.slug === editingItem.category,
+                  ) && (
+                    <option value={editingItem.category}>
+                      {editingItem.category}
+                    </option>
+                  )}
+                  {categories.map((cat) => (
+                    <option key={cat.slug} value={cat.slug}>
+                      {cat.name}
+                    </option>
+                  ))}
                 </select>
                 <textarea
                   placeholder={t("itemDescription")}

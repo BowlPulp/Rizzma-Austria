@@ -491,6 +491,13 @@
     "itemDescription": "Description",
     "noMenuItems": "No menu items yet.",
     "markAvailable": "Mark available",
-    "markUnavailable": "Mark unavailable"
+    "markUnavailable": "Mark unavailable",
+    "itemCategory": "Category",
+    "deleteItem": "Delete item",
+    "categories": "Categories",
+    "noCategories": "No categories yet. Add one to start.",
+    "categoryName": "New category name",
+    "addCategory": "Add category",
+    "deleteCategory": "Delete category"
   }
 }

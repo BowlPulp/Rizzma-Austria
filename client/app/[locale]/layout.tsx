@@ -6,6 +6,7 @@ import { routing } from "@/i18n/routing";
 import ThemeProvider from "../providers/ThemeProvider";
 import AuthProvider from "../providers/AuthProvider";
 import CartProvider from "../providers/CartProvider";
+import MenuCatalogProvider from "../providers/MenuCatalogProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -59,9 +60,11 @@ export default async function LocaleLayout({
       <body className="min-h-full flex flex-col">
         <ThemeProvider>
           <NextIntlClientProvider>
-            <CartProvider>
+            <MenuCatalogProvider>
+              <CartProvider>
                 <AuthProvider>{children}</AuthProvider>
               </CartProvider>
+            </MenuCatalogProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

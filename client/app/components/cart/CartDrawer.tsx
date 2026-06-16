@@ -5,13 +5,13 @@ import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { Minus, MapPin, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { useCart } from "@/app/providers/CartProvider";
-import { getMenuItemById } from "@/lib/menu-data";
+import { useMenuCatalog } from "@/app/providers/MenuCatalogProvider";
 import { formatPrice } from "@/lib/format-price";
 
 export default function CartDrawer() {
   const t = useTranslations("Cart");
   const router = useRouter();
-  const menuT = useTranslations("MenuPage");
+  const { getItemById } = useMenuCatalog();
   const {
     items,
     deliveryLocation,
@@ -139,7 +139,7 @@ export default function CartDrawer() {
 
             <ul className="flex-1 space-y-4 overflow-y-auto px-6 py-5">
               {items.map((line) => {
-                const menuItem = getMenuItemById(line.id);
+                const menuItem = getItemById(line.id);
                 if (!menuItem) return null;
 
                 return (
@@ -149,14 +149,14 @@ export default function CartDrawer() {
                   >
                     <img
                       src={menuItem.image}
-                      alt={menuT(`items.${line.id}.name`)}
+                      alt={menuItem.name}
                       className="size-20 shrink-0 rounded-xl object-cover"
                     />
 
                     <div className="flex min-w-0 flex-1 flex-col">
                       <div className="flex items-start justify-between gap-2">
                         <h3 className="font-semibold leading-tight">
-                          {menuT(`items.${line.id}.name`)}
+                          {menuItem.name}
                         </h3>
                         <button
                           type="button"

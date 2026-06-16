@@ -490,6 +490,13 @@
     "itemDescription": "Beschreibung",
     "noMenuItems": "Noch keine Artikel.",
     "markAvailable": "Verfügbar machen",
-    "markUnavailable": "Nicht verfügbar machen"
+    "markUnavailable": "Nicht verfügbar machen",
+    "itemCategory": "Kategorie",
+    "deleteItem": "Artikel löschen",
+    "categories": "Kategorien",
+    "noCategories": "Noch keine Kategorien. Füge eine hinzu.",
+    "categoryName": "Name der neuen Kategorie",
+    "addCategory": "Kategorie hinzufügen",
+    "deleteCategory": "Kategorie löschen"
   }
 }

@@ -8,7 +8,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { getMenuItemById } from "@/lib/menu-data";
+import { useMenuCatalog } from "./MenuCatalogProvider";
 import type { DeliveryLocation } from "@/lib/geolocation";
 import CartDrawer from "../components/cart/CartDrawer";
 import LocationPrompt from "../components/cart/LocationPrompt";
@@ -76,6 +76,7 @@ export default function CartProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const { getItemById } = useMenuCatalog();
   const [items, setItems] = useState<CartLineItem[]>([]);
   const [deliveryLocation, setDeliveryLocationState] =
     useState<DeliveryLocation | null>(null);
@@ -195,10 +196,10 @@ export default function CartProvider({
   const subtotal = useMemo(
     () =>
       items.reduce((sum, line) => {
-        const menuItem = getMenuItemById(line.id);
+        const menuItem = getItemById(line.id);
         return sum + (menuItem?.price ?? 0) * line.quantity;
       }, 0),
-    [items],
+    [items, getItemById],
   );
 
   const value = useMemo(

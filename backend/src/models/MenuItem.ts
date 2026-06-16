@@ -2,7 +2,9 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IMenuItem extends Document {
   slug: string;
-  category: 'pizza' | 'burgers' | 'salads';
+  name: string;
+  description: string;
+  category: string;
   price: number;
   image: string;
   popular: boolean;
@@ -23,11 +25,22 @@ const menuItemSchema = new Schema<IMenuItem>(
       lowercase: true,
       trim: true,
     },
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    description: {
+      type: String,
+      default: '',
+      trim: true,
+    },
     category: {
       type: String,
       required: true,
-      enum: ['pizza', 'burgers', 'salads'],
       index: true,
+      lowercase: true,
+      trim: true,
     },
     price: {
       type: Number,

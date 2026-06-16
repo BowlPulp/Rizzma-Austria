@@ -1,7 +1,16 @@
 import { Router, Request, Response } from 'express';
 import { authenticate } from '../middleware/auth';
 import { requireAdmin } from '../middleware/admin';
-import { Order, MenuItem, OrderStatus } from '../models';
+import { Order, MenuItem, Category, OrderStatus } from '../models';
+
+/** Turns a free-text name into a url-safe slug. */
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
 
 const router = Router();
 
@@ -243,42 +252,60 @@ router.get('/stats', async (_req: Request, res: Response): Promise<void> => {
 // Menu Management
 // ===========================
 
+/** Returns true if a category with the given slug exists. */
+async function categoryExists(slug: string): Promise<boolean> {
+  const found = await Category.findOne({ slug: slug.toLowerCase().trim() }).lean();
+  return Boolean(found);
+}
+
 /**
  * POST /api/admin/menu
- * Create a new menu item.
+ * Create a new menu item. Slug is auto-generated from the name.
  */
 router.post('/menu', async (req: Request, res: Response): Promise<void> => {
   try {
-    const { slug, category, price, image, popular, spicy, vegetarian, available } = req.body;
+    const { name, description, category, price, image, popular, spicy, vegetarian, available } = req.body;
+
+    const numericPrice = typeof price === 'string' ? parseFloat(price) : price;
 
     // Validation
-    if (!slug || !category || price == null || !image) {
-      res.status(400).json({ error: 'slug, category, price, and image are required' });
+    if (!name || typeof name !== 'string' || !name.trim()) {
+      res.status(400).json({ error: 'name is required' });
+      return;
+    }
+    if (!category || !image || numericPrice == null) {
+      res.status(400).json({ error: 'category, price, and image are required' });
       return;
     }
 
-    const validCategories = ['pizza', 'burgers', 'salads'];
-    if (!validCategories.includes(category)) {
-      res.status(400).json({ error: `Invalid category. Must be one of: ${validCategories.join(', ')}` });
+    if (!(await categoryExists(category))) {
+      res.status(400).json({ error: `Category "${category}" does not exist. Create it first.` });
       return;
     }
 
-    if (typeof price !== 'number' || price < 0) {
+    if (typeof numericPrice !== 'number' || Number.isNaN(numericPrice) || numericPrice < 0) {
       res.status(400).json({ error: 'Price must be a non-negative number' });
       return;
     }
 
-    // Check for duplicate slug
-    const existing = await MenuItem.findOne({ slug: slug.toLowerCase().trim() });
-    if (existing) {
-      res.status(409).json({ error: `Menu item with slug "${slug}" already exists` });
+    // Generate a unique slug from the name
+    const baseSlug = slugify(name);
+    if (!baseSlug) {
+      res.status(400).json({ error: 'Could not derive a slug from the provided name' });
       return;
+    }
+    let slug = baseSlug;
+    let suffix = 2;
+    while (await MenuItem.findOne({ slug })) {
+      slug = `${baseSlug}-${suffix++}`;
     }
 
     const menuItem = await MenuItem.create({
-      slug: slug.toLowerCase().trim(),
-      category,
-      price,
+      slug,
+      name: name.trim(),
+      description: typeof description === 'string' ? description.trim() : '',
+      category: category.toLowerCase().trim(),
+      price: numericPrice,
       image,
       popular: popular ?? false,
       spicy: spicy ?? false,
@@ -297,31 +324,43 @@ router.post('/menu', async (req: Request, res: Response): Promise<void> => {
 });
 
 /**
- * PATCH /api/admin/menu/:slug
- * Update an existing menu item by slug.
+ * PATCH /api/admin/menu/:id
+ * Update an existing menu item by its MongoDB _id.
  */
-router.patch('/menu/:slug', async (req: Request, res: Response): Promise<void> => {
+router.patch('/menu/:id', async (req: Request, res: Response): Promise<void> => {
   try {
-    const { slug } = req.params;
-    const { category, price, image, popular, spicy, vegetarian, available } = req.body;
+    const { id } = req.params;
+    const { name, description, category, price, image, popular, spicy, vegetarian, available } = req.body;
 
     const updateFields: Record<string, unknown> = {};
 
-    if (category !== undefined) {
-      const validCategories = ['pizza', 'burgers', 'salads'];
-      if (!validCategories.includes(category)) {
-        res.status(400).json({ error: `Invalid category. Must be one of: ${validCategories.join(', ')}` });
+    if (name !== undefined) {
+      if (typeof name !== 'string' || name.trim().length === 0) {
+        res.status(400).json({ error: 'Name must be a non-empty string' });
         return;
       }
-      updateFields.category = category;
+      updateFields.name = name.trim();
+    }
+
+    if (description !== undefined) {
+      updateFields.description = typeof description === 'string' ? description.trim() : '';
+    }
+
+    if (category !== undefined) {
+      if (!(await categoryExists(category))) {
+        res.status(400).json({ error: `Category "${category}" does not exist. Create it first.` });
+        return;
+      }
+      updateFields.category = category.toLowerCase().trim();
     }
 
     if (price !== undefined) {
-      if (typeof price !== 'number' || price < 0) {
+      const numericPrice = typeof price === 'string' ? parseFloat(price) : price;
+      if (typeof numericPrice !== 'number' || Number.isNaN(numericPrice) || numericPrice < 0) {
         res.status(400).json({ error: 'Price must be a non-negative number' });
         return;
       }
-      updateFields.price = price;
+      updateFields.price = numericPrice;
     }
 
     if (image !== undefined) {
@@ -342,8 +381,8 @@ router.patch('/menu/:slug', async (req: Request, res: Response): Promise<void> =
       return;
     }
 
-    const menuItem = await MenuItem.findOneAndUpdate(
-      { slug },
+    const menuItem = await MenuItem.findByIdAndUpdate(
+      id,
       { $set: updateFields },
       { new: true, runValidators: true }
     );
@@ -357,21 +396,25 @@ router.patch('/menu/:slug', async (req: Request, res: Response): Promise<void> =
       message: 'Menu item updated successfully',
       item: menuItem,
     });
-  } catch (error) {
+  } catch (error: unknown) {
+    if (error instanceof Error && error.name === 'CastError') {
+      res.status(400).json({ error: 'Invalid menu item ID format' });
+      return;
+    }
     console.error('Update menu item error:', error);
     res.status(500).json({ error: 'Failed to update menu item' });
   }
 });
 
 /**
- * DELETE /api/admin/menu/:slug
- * Delete a menu item by slug.
+ * DELETE /api/admin/menu/:id
+ * Delete a menu item by its MongoDB _id.
  */
-router.delete('/menu/:slug', async (req: Request, res: Response): Promise<void> => {
+router.delete('/menu/:id', async (req: Request, res: Response): Promise<void> => {
   try {
-    const { slug } = req.params;
+    const { id } = req.params;
 
-    const menuItem = await MenuItem.findOneAndDelete({ slug });
+    const menuItem = await MenuItem.findByIdAndDelete(id);
 
     if (!menuItem) {
       res.status(404).json({ error: 'Menu item not found' });
@@ -382,9 +425,110 @@ router.delete('/menu/:slug', async (req: Request, res: Response): Promise<void> 
       message: 'Menu item deleted successfully',
       item: menuItem,
     });
-  } catch (error) {
+  } catch (error: unknown) {
+    if (error instanceof Error && error.name === 'CastError') {
+      res.status(400).json({ error: 'Invalid menu item ID format' });
+      return;
+    }
     console.error('Delete menu item error:', error);
     res.status(500).json({ error: 'Failed to delete menu item' });
+  }
+});
+
+// ===========================
+// Category Management
+// ===========================
+
+/**
+ * GET /api/admin/categories
+ * Lists all categories.
+ */
+router.get('/categories', async (_req: Request, res: Response): Promise<void> => {
+  try {
+    const categories = await Category.find().sort({ order: 1, name: 1 }).lean();
+    res.status(200).json({ categories });
+  } catch (error) {
+    console.error('Admin list categories error:', error);
+    res.status(500).json({ error: 'Failed to fetch categories' });
+  }
+});
+
+/**
+ * POST /api/admin/categories
+ * Create a new category. Slug is auto-generated from the name.
+ */
+router.post('/categories', async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { name, order } = req.body;
+
+    if (!name || typeof name !== 'string' || !name.trim()) {
+      res.status(400).json({ error: 'name is required' });
+      return;
+    }
+
+    const slug = slugify(name);
+    if (!slug) {
+      res.status(400).json({ error: 'Could not derive a slug from the provided name' });
+      return;
+    }
+
+    const existing = await Category.findOne({ slug });
+    if (existing) {
+      res.status(409).json({ error: `Category "${name}" already exists` });
+      return;
+    }
+
+    const category = await Category.create({
+      slug,
+      name: name.trim(),
+      order: typeof order === 'number' ? order : 0,
+    });
+
+    res.status(201).json({
+      message: 'Category created successfully',
+      category,
+    });
+  } catch (error) {
+    console.error('Create category error:', error);
+    res.status(500).json({ error: 'Failed to create category' });
+  }
+});
+
+/**
+ * DELETE /api/admin/categories/:id
+ * Delete a category by _id. Blocked if any menu item still uses it.
+ */
+router.delete('/categories/:id', async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+
+    const category = await Category.findById(id);
+    if (!category) {
+      res.status(404).json({ error: 'Category not found' });
+      return;
+    }
+
+    const itemsUsing = await MenuItem.countDocuments({ category: category.slug });
+    if (itemsUsing > 0) {
+      res.status(409).json({
+        error: `Cannot delete category "${category.name}" — ${itemsUsing} menu item(s) still use it.`,
+      });
+      return;
+    }
+
+    await category.deleteOne();
+
+    res.status(200).json({
+      message: 'Category deleted successfully',
+      category,
+    });
+  } catch (error: unknown) {
+    if (error instanceof Error && error.name === 'CastError') {
+      res.status(400).json({ error: 'Invalid category ID format' });
+      return;
+    }
+    console.error('Delete category error:', error);
+    res.status(500).json({ error: 'Failed to delete category' });
   }
 });
 

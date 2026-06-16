@@ -2,23 +2,21 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Check, Flame, Leaf, Plus, Search, Star, X } from "lucide-react";
+import { Check, Flame, Leaf, Loader2, Plus, Search, Star, X } from "lucide-react";
 import { useCart } from "@/app/providers/CartProvider";
-import { formatPrice } from "@/lib/format-price";
 import {
-  menuCategories,
-  menuItems,
-  type MenuCategory,
-  type MenuItem,
-} from "@/lib/menu-data";
+  useMenuCatalog,
+  type CatalogItem,
+} from "@/app/providers/MenuCatalogProvider";
+import { formatPrice } from "@/lib/format-price";
 
-function MenuItemCard({ item }: { item: MenuItem }) {
+function MenuItemCard({ item }: { item: CatalogItem }) {
   const t = useTranslations("MenuPage");
   const { requestAddItem } = useCart();
   const [justAdded, setJustAdded] = useState(false);
 
   function handleAddToCart() {
-    requestAddItem(item.id);
+    requestAddItem(item.slug);
     setJustAdded(true);
     window.setTimeout(() => setJustAdded(false), 1500);
   }
@@ -28,7 +26,7 @@ function MenuItemCard({ item }: { item: MenuItem }) {
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={item.image}
-          alt={t(`items.${item.id}.name`)}
+          alt={item.name}
           className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
@@ -57,16 +55,14 @@ function MenuItemCard({ item }: { item: MenuItem }) {
 
       <div className="flex flex-1 flex-col p-5">
         <div className="mb-2 flex items-start justify-between gap-3">
-          <h3 className="text-lg font-bold leading-tight">
-            {t(`items.${item.id}.name`)}
-          </h3>
+          <h3 className="text-lg font-bold leading-tight">{item.name}</h3>
           <span className="shrink-0 text-lg font-black text-red-600">
             {formatPrice(item.price)}
           </span>
         </div>
 
         <p className="mb-5 flex-1 text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
-          {t(`items.${item.id}.description`)}
+          {item.description}
         </p>
 
         <button
@@ -92,34 +88,41 @@ type MenuContentProps = {
 
 export default function MenuContent({ initialSearch = "" }: MenuContentProps) {
   const t = useTranslations("MenuPage");
-  const [activeFilter, setActiveFilter] = useState<MenuCategory | "all">("all");
+  const { items, categories, isLoading } = useMenuCatalog();
+  const [activeFilter, setActiveFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState(initialSearch);
 
   useEffect(() => {
     setSearchQuery(initialSearch);
   }, [initialSearch]);
 
+  const categoryNames = useMemo(() => {
+    const map = new Map<string, string>();
+    categories.forEach((cat) => map.set(cat.slug, cat.name));
+    return map;
+  }, [categories]);
+
   const filteredItems = useMemo(() => {
     const categoryItems =
       activeFilter === "all"
-        ? menuItems
-        : menuItems.filter((item) => item.category === activeFilter);
+        ? items
+        : items.filter((item) => item.category === activeFilter);
 
     const query = searchQuery.trim().toLowerCase();
     if (!query) return categoryItems;
 
     return categoryItems.filter((item) => {
-      const name = t(`items.${item.id}.name`).toLowerCase();
-      const description = t(`items.${item.id}.description`).toLowerCase();
-      const category = t(`filters.${item.category}`).toLowerCase();
+      const categoryLabel = (
+        categoryNames.get(item.category) ?? item.category
+      ).toLowerCase();
 
       return (
-        name.includes(query) ||
-        description.includes(query) ||
-        category.includes(query)
+        item.name.toLowerCase().includes(query) ||
+        item.description.toLowerCase().includes(query) ||
+        categoryLabel.includes(query)
       );
     });
-  }, [activeFilter, searchQuery, t]);
+  }, [activeFilter, searchQuery, items, categoryNames]);
 
   const isSearching = searchQuery.trim().length > 0;
 
@@ -167,18 +170,29 @@ export default function MenuContent({ initialSearch = "" }: MenuContentProps) {
       <section className="sticky top-16 z-40 border-b border-neutral-200 bg-white/95 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/95 sm:top-20">
         <div className="mx-auto max-w-7xl px-6 py-4">
           <div className="flex gap-2 overflow-x-auto scrollbar-hide">
-            {menuCategories.map((category) => (
+            <button
+              type="button"
+              onClick={() => setActiveFilter("all")}
+              className={`whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-semibold transition ${
+                activeFilter === "all"
+                  ? "bg-red-600 text-white shadow-md shadow-red-600/25"
+                  : "bg-neutral-100 text-neutral-700 hover:bg-red-50 hover:text-red-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-red-950 dark:hover:text-red-400"
+              }`}
+            >
+              {t("filters.all")}
+            </button>
+            {categories.map((category) => (
               <button
-                key={category}
+                key={category.slug}
                 type="button"
-                onClick={() => setActiveFilter(category)}
+                onClick={() => setActiveFilter(category.slug)}
                 className={`whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-semibold transition ${
-                  activeFilter === category
+                  activeFilter === category.slug
                     ? "bg-red-600 text-white shadow-md shadow-red-600/25"
                     : "bg-neutral-100 text-neutral-700 hover:bg-red-50 hover:text-red-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-red-950 dark:hover:text-red-400"
                 }`}
               >
-                {t(`filters.${category}`)}
+                {category.name}
               </button>
             ))}
           </div>
@@ -197,7 +211,11 @@ export default function MenuContent({ initialSearch = "" }: MenuContentProps) {
           </p>
         </div>
 
-        {filteredItems.length === 0 ? (
+        {isLoading ? (
+          <div className="flex justify-center py-16">
+            <Loader2 size={32} className="animate-spin text-red-600" />
+          </div>
+        ) : filteredItems.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-neutral-300 px-6 py-16 text-center dark:border-neutral-700">
             <p className="text-lg font-semibold">
               {isSearching ? t("searchNoResultsTitle") : t("emptyTitle")}
@@ -209,7 +227,7 @@ export default function MenuContent({ initialSearch = "" }: MenuContentProps) {
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filteredItems.map((item) => (
-              <MenuItemCard key={item.id} item={item} />
+              <MenuItemCard key={item.slug} item={item} />
             ))}
           </div>
         )}

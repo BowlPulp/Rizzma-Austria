@@ -15,12 +15,7 @@ router.get('/', async (req: Request, res: Response): Promise<void> => {
     const filter: Record<string, unknown> = {};
 
     if (category && typeof category === 'string') {
-      const validCategories = ['pizza', 'burgers', 'salads'];
-      if (!validCategories.includes(category)) {
-        res.status(400).json({ error: `Invalid category. Must be one of: ${validCategories.join(', ')}` });
-        return;
-      }
-      filter.category = category;
+      filter.category = category.toLowerCase().trim();
     }
 
     // By default, only show available items for public route

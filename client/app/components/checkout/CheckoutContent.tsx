@@ -5,8 +5,8 @@ import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useAuth } from "@/app/providers/AuthProvider";
 import { useCart } from "@/app/providers/CartProvider";
+import { useMenuCatalog } from "@/app/providers/MenuCatalogProvider";
 import { apiFetch } from "@/lib/api";
-import { getMenuItemById } from "@/lib/menu-data";
 import { formatPrice } from "@/lib/format-price";
 import {
   ShoppingBag,
@@ -30,6 +30,7 @@ export default function CheckoutContent() {
   const t = useTranslations("CheckoutPage");
   const router = useRouter();
   const { user, profile, isLoading: authLoading } = useAuth();
+  const { getItemById } = useMenuCatalog();
   const {
     items,
     subtotal,
@@ -78,10 +79,10 @@ export default function CheckoutContent() {
 
     try {
       const cartItems = items.map((item) => {
-        const menuItem = getMenuItemById(item.id);
+        const menuItem = getItemById(item.id);
         return {
           slug: item.id,
-          name: menuItem?.id || item.id,
+          name: menuItem?.name || item.id,
           price: menuItem?.price || 0,
           quantity: item.quantity,
         };
@@ -235,7 +236,7 @@ export default function CheckoutContent() {
             </h2>
             <ul className="divide-y divide-neutral-100 dark:divide-neutral-800">
               {items.map((item) => {
-                const menuItem = getMenuItemById(item.id);
+                const menuItem = getItemById(item.id);
                 if (!menuItem) return null;
                 return (
                   <li
@@ -245,11 +246,11 @@ export default function CheckoutContent() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={menuItem.image}
-                      alt={menuItem.id}
+                      alt={menuItem.name}
                       className="size-16 rounded-xl object-cover sm:size-20"
                     />
                     <div className="flex-1 min-w-0">
-                      <p className="font-semibold truncate">{menuItem.id}</p>
+                      <p className="font-semibold truncate">{menuItem.name}</p>
                       <p className="text-sm text-neutral-500 dark:text-neutral-400">
                         {formatPrice(menuItem.price)}
                       </p>
